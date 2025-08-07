@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "calm"
+version = "0.1.0"
+description = "Continual Associative Learning Model (SDM-based)"
+authors = [
+    { name="Your Name", email="your@email.com" }
+]
+dependencies = [
+    "fastapi",
+    "numpy",
+    "scikit-learn",
+    "uvicorn[standard]"
+]
