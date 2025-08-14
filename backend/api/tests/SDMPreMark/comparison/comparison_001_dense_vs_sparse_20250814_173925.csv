@@ -1,0 +1,5 @@
+vector_dim,radius_factor,access_radius,encoding_type,match_ratio,input_ones_count,sparsity_ratio,regime
+128,0.1,12,sparse,1.0,3,0.0234,under_activation
+128,0.4,51,sparse,1.0,3,0.0234,transition
+128,0.6,76,sparse,1.0,3,0.0234,over_activation
+256,0.4,102,sparse,1.0,7,0.0273,transition

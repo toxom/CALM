@@ -1,0 +1,5 @@
+vector_dim,radius_factor,access_radius,match_ratio,input_ones_count,actual_sparsity,expected_performance
+64,0.2,12,1.0,1,0.0156,perfect_sparse
+128,0.3,38,1.0,3,0.0234,perfect_sparse
+256,0.4,102,1.0,7,0.0273,perfect_sparse
+512,0.5,256,1.0,15,0.0293,perfect_sparse
