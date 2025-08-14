@@ -1,0 +1,17 @@
+{
+    "C_Cpp.intelliSenseEngine": "default",
+    "C_Cpp.default.configurationProvider": "ms-vscode.vscode-platformio-ide",
+    "files.associations": {
+        "*.dbclient-js": "javascript",
+        "*.h": "cpp",
+        "*.cpp": "cpp",
+        "*.ino": "cpp",
+        "deque": "cpp",
+        "string": "cpp",
+        "unordered_map": "cpp",
+        "unordered_set": "cpp",
+        "vector": "cpp",
+        "system_error": "cpp"
+    },
+    "idf.pythonInstallPath": "/Users/jr/anaconda3/bin/python"
+}
