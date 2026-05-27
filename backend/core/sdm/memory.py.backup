@@ -1,14 +1,7 @@
-# backend/core/sdm/memory.py
-from math import dist
-
 import numpy as np
-# import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 import sys
 from typing import Dict, List, Tuple, Optional
-import re
-import logging
-
-logger = logging.getLogger(__name__)
 class SparseDistributedMemory:
     def __init__(self, vector_dim=1024, num_locations=1000, access_radius=100):
         """
@@ -77,7 +70,7 @@ class SparseDistributedMemory:
             min_distance = min(min_distance, dist)
             max_distance = max(max_distance, dist)
             
-            if dist <= self.access_radius or len(activated_locations) < 3:
+            if dist <= self.access_radius:
                 activated_locations.append(i)
                 self.access_counts[i] += 1
                 
@@ -88,14 +81,9 @@ class SparseDistributedMemory:
                 # Better approach: Store the actual pattern with reinforcement
                 self.memory[i] += np.where(input_vector == 1, strength, -strength)
         
-        # DEBUG: Diagnostic info
-        logger.debug(
-            "SDM write | radius=%d min_dist=%d max_dist=%d activated=%d",
-            self.access_radius,
-            min_distance,
-            max_distance,
-            len(activated_locations)
-        )        
+        # DEBUG: Print diagnostic info
+        print(f"DEBUG: access_radius={self.access_radius}, min_dist={min_distance}, max_dist={max_distance}, activated={len(activated_locations)}")
+        
         # Track statistics
         self.write_stats.append({
             'activated_locations': len(activated_locations),
@@ -231,7 +219,6 @@ def run_reinforcement_analysis(vector_dim=128, num_locations=1000, access_radius
 
 def plot_reinforcement_effects(results):
     """Plot the effects of reinforcement on performance"""
-    import matplotlib.pyplot as plt  # Lazy import here
     fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
     
     # Plot match ratios
