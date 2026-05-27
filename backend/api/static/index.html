@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CALM - SDM + LLM Interface</title>
+    <link rel="stylesheet" href="globals.css">
+
+</head>
+<script src="app.js"></script>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 CALM</h1>
+            <p>Continual Associative Learning Model - SDM + LLM Hybrid System</p>
+        </header>
+        
+        <!-- Configuration -->
+        <div class="card" style="margin-bottom: 20px;">
+            <h2>⚙️ Configuration</h2>
+            <div class="mode-toggle">
+                <button class="mode-btn active" onclick="setMode('binary')">Binary Mode (0/1)</button>
+                <button class="mode-btn" onclick="setMode('ternary')">Ternary Mode (-1/0/+1)</button>
+            </div>
+            <div id="config-status"></div>
+        </div>
+        
+        <div class="grid">
+            <!-- Store Pattern -->
+            <div class="card">
+                <h2>💾 Store Pattern</h2>
+                <textarea id="store-text" placeholder="Enter text to store in SDM memory...">Python is a high-level programming language</textarea>
+                <button onclick="storePattern()">Store Pattern</button>
+                <div id="store-result"></div>
+            </div>
+            
+            <!-- Recall Pattern -->
+            <div class="card">
+                <h2>🔍 Recall Patterns</h2>
+                <input type="text" id="recall-query" placeholder="Enter query..." value="What is Python?">
+                <button onclick="recallPatterns()">Recall Similar Patterns</button>
+                <div id="recall-result"></div>
+            </div>
+        </div>
+        
+        <!-- Hybrid Query -->
+        <div class="card full-width">
+            <h2>🤖 Hybrid Query (System 1 + System 2)</h2>
+            <input type="text" id="hybrid-query" placeholder="Ask a question..." value="Tell me about programming">
+            <button onclick="hybridQuery()">Query with SDM + LLM</button>
+            <div id="hybrid-result"></div>
+        </div>
+        
+        <!-- Stored Patterns -->
+        <div class="card full-width">
+            <h2>📚 Stored Patterns</h2>
+            <button onclick="listPatterns()">Refresh List</button>
+            <button onclick="clearPatterns()" style="background: #dc2626; margin-left: 10px;">Clear All</button>
+            <div id="patterns-list"></div>
+        </div>
+    </div>
+
+</body>
+</html>

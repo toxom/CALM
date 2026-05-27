@@ -1,9 +1,24 @@
 from fastapi.responses import JSONResponse
 import json
+import numpy as np
 from fastapi import APIRouter, Query, HTTPException
 from backend.core.sdm.memory import run_sdm_memory_test
 
 router = APIRouter()
+
+def convert_to_serializable(obj):
+    """Convert numpy types to Python native types"""
+    if isinstance(obj, np.integer):
+        return int(obj)
+    elif isinstance(obj, np.floating):
+        return float(obj)
+    elif isinstance(obj, np.ndarray):
+        return obj.tolist()
+    elif isinstance(obj, dict):
+        return {key: convert_to_serializable(value) for key, value in obj.items()}
+    elif isinstance(obj, list):
+        return [convert_to_serializable(item) for item in obj]
+    return obj
 
 @router.get("/run")
 def test_memory(
@@ -14,10 +29,13 @@ def test_memory(
 ):
     if access_radius >= vector_dim:
         raise HTTPException(status_code=400, detail="access_radius must be less than vector_dim")
+    
     result = run_sdm_memory_test(vector_dim, num_locations, access_radius, reinforce)
-    # Return compact JSON response
+    
+    # Convert all numpy types to JSON-serializable types
+    serializable_result = convert_to_serializable(result)
+    
     return JSONResponse(
-        content=result,
-        media_type="application/json",
-        dumps=lambda obj, *, default=None: json.dumps(obj, separators=(',', ':'))
+        content=serializable_result,
+        media_type="application/json"
     )
